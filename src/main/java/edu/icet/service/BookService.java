@@ -1,9 +1,13 @@
 package edu.icet.service;
 
-import edu.icet.model.Book;
+import edu.icet.model.dto.Book;
+import edu.icet.model.entity.BookEntity;
 import edu.icet.repository.BookRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Service
 public class BookService {
@@ -11,24 +15,44 @@ public class BookService {
     @Autowired
     BookRepository bookRepository;
 
-    public void getAllDetails() {
-        bookRepository.findAll();
+    public List<Book> getAllDetails() {
+        List<BookEntity> bookEntityList =bookRepository.findAll();
+        List<Book> books=new ArrayList<>();
+
+        for(BookEntity bookEntity:bookEntityList){
+            books.add(new Book(
+                    bookEntity.getTitle(),
+                    bookEntity.getPublisher(),
+                    bookEntity.getAuthor(),
+                    bookEntity.getCategory(),
+                    bookEntity.getIsbm(),
+                    bookEntity.getAvailableCopies()
+            ));
+        }
+
+        return books;
+
     }
 
-    public void add() {
-        Book book = new Book(
-                2L,
-                "Madol Duwa",
-                "Martin Wickramasinghe",
-                "Sarasavi",
-                "978-955-31-0525-7",
-                "Sinhala Literature",
-                10
+    public void add(Book book) {
+
+        BookEntity bookEntity=new BookEntity(
+                getId(),
+                book.getTitle(),
+                book.getAuthor(),
+                book.getPublisher(),
+                book.getIsbm(),
+                book.getCategory(),
+                book.getAvailableCopies()
         );
+        System.out.println(bookEntity);
+        bookRepository.save(bookEntity);
 
-        //bookRepository.save(book);
-        System.out.println(bookRepository.findAll());
 
+
+    }
+    public Long getId(){
+        return 3L;
     }
 
 }

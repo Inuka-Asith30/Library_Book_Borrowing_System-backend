@@ -1,8 +1,9 @@
-package edu.icet.model;
+package edu.icet.model.entity;
 
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 import lombok.*;
 
 @Getter
@@ -11,7 +12,7 @@ import lombok.*;
 @NoArgsConstructor
 @ToString
 @Entity
-public class Book {
+public class BookEntity {
 
     @Id
     private Long id;
