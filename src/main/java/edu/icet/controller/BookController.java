@@ -26,7 +26,6 @@ public class BookController {
 
     @GetMapping("/{author}")
     public String getAuthor(@PathVariable String author){
-
         return author;
     }
 
@@ -39,18 +38,15 @@ public class BookController {
 
     @PostMapping
     public void add(@RequestBody Book book){
-        //System.out.println(book);
         bookService.add(book);
+    }
+
+    @GetMapping("/get/{id}")
+    public Book getById(@PathVariable String id){
+        Book byId = bookService.getById(id);
+        System.out.println(byId);
+        return bookService.getById(id);
     }
 
 }
 
-//Book book = new Book(
-//        1L,
-//        "Madol Duwa",
-//        "Martin Wickramasinghe",
-//        "Sarasavi",
-//        "978-955-31-0525-7",
-//        "Sinhala Literature",
-//        10
-//);
