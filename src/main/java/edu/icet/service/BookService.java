@@ -39,7 +39,6 @@ public class BookService {
     public void add(Book book) {
 
 
-
         BookEntity bookEntity=new BookEntity(
                 book.getId(),
                 book.getTitle(),

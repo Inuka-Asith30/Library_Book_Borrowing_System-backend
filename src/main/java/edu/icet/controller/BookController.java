@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
+@CrossOrigin(origins = "http://localhost:5173")
 public class BookController {
 
     @Autowired
@@ -33,10 +34,9 @@ public class BookController {
     public List<Book> getAllDetails(){
         List<Book> bookList =bookService.getAllDetails();
         return bookList;
-
     }
 
-    @PostMapping
+    @PostMapping("/save")
     public void add(@RequestBody Book book){
         bookService.add(book);
     }
